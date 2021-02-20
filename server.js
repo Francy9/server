@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 
 app.get("/luogo",(req,resp) =>{
+    console.log("richiesta in arrivo!!");
     resp.send("Ciao!");
-    resp.send("richiesta in arrivo!!");
     resp.sendStatus(200);
 })
 
