@@ -3,6 +3,7 @@ const app = express();
 
 app.get("/luogo",(req,resp) =>{
     resp.send("Ciao!");
+    resp.send("richiesta in arrivo!!");
     resp.sendStatus(200);
 })
 
