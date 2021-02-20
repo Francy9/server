@@ -8,6 +8,8 @@ app.get("/luogo",async(req,resp) =>{
     const meteo = await got('api.openweathermap.org/data/2.5/weather?q='+città'&appid='+key);
     const tempo = meteo.body;
     resp.send(tempo);
+    resp.sendStatus(200);
+})
 
 const listener = app.listen(process.env.PORT, () => {
     console.log("Your app is listening on port " + listener.address().port);
