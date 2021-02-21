@@ -9,7 +9,8 @@ app.get("/luogo/:nome",async(req,resp) =>{
     try {
 	const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key +'&mode=json&units=metric&lang=it');
         const corpo = JSON.parse(response.body);
-        resp.send("temperatura:" + corpo.main.temp);
+        resp.send("temperatura:" + parseInt(corpo.main.temp) +
+             	  "\n minima:" + parseInt(corpo.main.temp_min));
 	} catch (error) {
 	console.log(error.response.body);
     	resp.status(404).end();
