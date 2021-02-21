@@ -26,12 +26,11 @@ const nome =req.params.nome;
 	} catch (error) {
 		console.log(error.response.body);
     resp.sendStatus(404);
-		//=> 'Internal server error ...'
+	
 	} 
 });
 
 const listener = app.listen(process.env.PORT, () => {
     console.log("Your app is listening on port " + listener.address().port);
   });
-
 
