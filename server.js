@@ -12,7 +12,7 @@ app.get("/luogo/:nome",async(req,resp) =>{
         resp.send(corpo);
 	} catch (error) {
 	console.log(error.response.body);
-    	resp.sendStatus(404);
+    	resp.status(404);
 		//=> 'Internal server error ...'
 	}
 })
