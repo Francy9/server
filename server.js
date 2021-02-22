@@ -79,7 +79,7 @@ app.get("/Tramonto/:nome",async(req,resp) => {
     resp.sendStatus(404);
   }
 });
-app.get("/Giornaliero/:nome",async(req,resp) => {
+app.get("/Attuale/:nome",async(req,resp) => {
 const nome =req.params.nome;
 try {
 	const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key +'&mode=json&units=metric&lang=it');
@@ -102,6 +102,40 @@ try {
 	} catch (error) {
 		console.log(error.response.body);
     		resp.sendStatus(404);	
+	} 
+});
+
+app.get("/Giornaliero/:numero",async(req,resp) => {
+const numero =req.params.numero;
+  const lat = req.query.lat;
+  const long = req.query.long;
+  try {
+		const response = await got('https://api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + long +'&exclude=current,minutely,hourly,alerts&appid=' + key + '&mode=json&units=metric&lang=it');
+    const corpo = JSON.parse(response.body);
+		const tempo = JSON.stringify(corpo.daily[numero].weather).split(",")[2].split(":")[1];  
+    const millisecAlb = corpo.daily[numero].sunrise * 1000;
+    const dataAlb = new Date(millisecAlb);
+    const alba =dataAlb.toLocaleString();
+    const millisecTram = corpo.daily[numero].sunset * 1000;
+    const dataTram = new Date(millisecTram);
+    const tramonto =dataTram.toLocaleString();
+    const millisecDay= corpo.daily[numero].dt * 1000;
+    const dataDay = new Date(millisecDay);
+    const giorno =dataDay.toLocaleString();
+    
+    //console.log(JSON.stringify());
+    resp.send("Meteo giorno :" + giorno +
+      "\nTempo: " + tempo +
+		 "\nTemperatura: " + corpo.daily[numero].temp.day + "°C"+
+     "\nPercepita: " + corpo.daily[numero].feels_like.day +"°C" +
+		 "\n Minime: " + corpo.daily[numero].temp.min + "°C"+
+		 "\n Massime: " + corpo.daily[numero].temp.max + "°C"+
+		 "\n Alba: " + alba +
+     "\ntramonto: " + tramonto);
+	} catch (error) {
+		console.log(error.response.body);
+    resp.sendStatus(404);
+	
 	} 
 });
 
