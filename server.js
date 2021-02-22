@@ -6,7 +6,7 @@ var key = require('./.env');
 app.get("/Tempo/:nome",async(req,resp) => {
   try{
     const nome =req.params.nome;
-    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ process.env.key +'&mode=json&units=metric&lang=it');
+    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key +'&mode=json&units=metric&lang=it');
     const corpo = JSON.parse(response.body);
     const tempo = JSON.stringify(corpo.weather).split(",")[2].split(":")[1];
     resp.send("Tempo: "+ tempo);
@@ -17,7 +17,7 @@ app.get("/Tempo/:nome",async(req,resp) => {
 app.get("/Temperatura/:nome",async(req,resp) => {
   try{
     const nome =req.params.nome;
-    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ process.env.key  +'&mode=json&units=metric&lang=it');
+    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key  +'&mode=json&units=metric&lang=it');
     const corpo = JSON.parse(response.body);
     resp.send("Temperatura: " + corpo.main.temp + "°C");
   }catch(error){
@@ -27,7 +27,7 @@ app.get("/Temperatura/:nome",async(req,resp) => {
 app.get("/Percepita/:nome",async(req,resp)=>{
   try{
     const nome =req.params.nome;
-    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ process.env.key +'&mode=json&units=metric&lang=it');
+    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key +'&mode=json&units=metric&lang=it');
     const corpo = JSON.parse(response.body);
     resp.send("Percepita: " + corpo.main.feels_like + "°C");
   }catch(error){
@@ -37,7 +37,7 @@ app.get("/Percepita/:nome",async(req,resp)=>{
 app.get("/Massime/:nome",async(req,resp) => {
   try{
     const nome =req.params.nome;
-    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ process.env.key  +'&mode=json&units=metric&lang=it');
+    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key  +'&mode=json&units=metric&lang=it');
     const corpo = JSON.parse(response.body);
     resp.send("Massime: " + corpo.main.temp_max + "°C");
   }catch(error){
@@ -47,7 +47,7 @@ app.get("/Massime/:nome",async(req,resp) => {
 app.get("/Minime/:nome",async(req,resp) => {
   try{
     const nome =req.params.nome;
-    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ process.env.key  +'&mode=json&units=metric&lang=it');
+    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key  +'&mode=json&units=metric&lang=it');
     const corpo = JSON.parse(response.body);
     resp.send("Minime: " + corpo.main.temp_min + "°C");
   }catch(error){
@@ -57,7 +57,7 @@ app.get("/Minime/:nome",async(req,resp) => {
 app.get("/Alba/:nome",async(req,resp) => {
   try{
     const nome =req.params.nome;
-    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ process.env.key  +'&mode=json&units=metric&lang=it');
+    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key  +'&mode=json&units=metric&lang=it');
     const corpo = JSON.parse(response.body);
     const millisecAlb = corpo.sys.sunrise * 1000;
     const dataAlb = new Date(millisecAlb);
@@ -70,7 +70,7 @@ app.get("/Alba/:nome",async(req,resp) => {
 app.get("/Tramonto/:nome",async(req,resp) => {
   try{
     const nome =req.params.nome;
-    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ process.env.key  +'&mode=json&units=metric&lang=it');
+    const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key  +'&mode=json&units=metric&lang=it');
     const corpo = JSON.parse(response.body);
     const millisecTram = corpo.sys.sunset * 1000;
     const dataTram = new Date(millisecTram);
@@ -83,7 +83,7 @@ app.get("/Tramonto/:nome",async(req,resp) => {
 app.get("/Attuale/:nome",async(req,resp) => {
 const nome =req.params.nome;
 try {
-	const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ process.env.key  +'&mode=json&units=metric&lang=it');
+	const response = await got('http://api.openweathermap.org/data/2.5/weather?q='+ nome +'&appid='+ key  +'&mode=json&units=metric&lang=it');
     	const corpo = JSON.parse(response.body);
 	const tempo = JSON.stringify(corpo.weather).split(",")[2].split(":")[1];  
     	const millisecAlb = corpo.sys.sunrise * 1000;
@@ -111,7 +111,7 @@ const numero =req.params.numero;
   const lat = req.query.lat;
   const long = req.query.long;
   try {
-		const response = await got('https://api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + long +'&exclude=current,minutely,hourly,alerts&appid=' + process.env.key  + '&mode=json&units=metric&lang=it');
+		const response = await got('https://api.openweathermap.org/data/2.5/onecall?lat='+ lat + '&lon=' + long +'&exclude=current,minutely,hourly,alerts&appid=' + key  + '&mode=json&units=metric&lang=it');
     const corpo = JSON.parse(response.body);
 		const tempo = JSON.stringify(corpo.daily[numero].weather).split(",")[2].split(":")[1];  
     const millisecAlb = corpo.daily[numero].sunrise * 1000;
