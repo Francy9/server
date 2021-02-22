@@ -125,16 +125,16 @@ const numero =req.params.numero;
     
     //console.log(JSON.stringify());
     resp.send("Meteo giorno :" + giorno +
-      "\nTempo: " + tempo +
-		 "\nTemperatura: " + corpo.daily[numero].temp.day + "°C"+
-     "\nPercepita: " + corpo.daily[numero].feels_like.day +"°C" +
-		 "\n Minime: " + corpo.daily[numero].temp.min + "°C"+
-		 "\n Massime: " + corpo.daily[numero].temp.max + "°C"+
-		 "\n Alba: " + alba +
-     "\ntramonto: " + tramonto);
+              "\nTempo: " + tempo +
+	      "\nTemperatura: " + corpo.daily[numero].temp.day + "°C"+
+              "\nPercepita: " + corpo.daily[numero].feels_like.day +"°C" +
+	      "\n Minime: " + corpo.daily[numero].temp.min + "°C"+
+	      "\n Massime: " + corpo.daily[numero].temp.max + "°C"+
+	      "\n Alba: " + alba +
+              "\ntramonto: " + tramonto);
 	} catch (error) {
 		console.log(error.response.body);
-    resp.sendStatus(404);
+    		resp.sendStatus(404);
 	
 	} 
 });
