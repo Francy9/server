@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const got = require('got');
-var key = require('./env.js');
+var key = "aca959ae6d5053b35c1f3e2f551b0b49";
 
 app.get("/Tempo/:nome",async(req,resp) => {
   try{
